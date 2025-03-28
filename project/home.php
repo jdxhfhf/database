@@ -41,8 +41,10 @@
    
         .products {
             display: flex;
-            flex-direction: column; 
+            flex-direction: row; 
+            flex-wrap: wrap;
             align-items: center;  
+            justify-content: center;
             gap: 20px;              
             margin-top: 20px;
         }
@@ -56,6 +58,7 @@
             background-color: white;
             width: 350px;
             text-align: center;
+        
         }
 
         img {

@@ -21,7 +21,7 @@
         .logo {
             font-size: 60px;
             color: black;
-            animation: logo 3s infinite;
+           /* animation: logo 3s infinite; */
         }
         nav {
             display: flex;
@@ -40,17 +40,44 @@
         .items {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-evenly;
+            flex-direction: column;
             border: solid black 2px;
             padding: 20px;
             margin: 20px;
             background-color: white;
         }
+        .sale{
+          position: absolute;
+          top: 50%;
+          left: 5%;
+        font-size: 80px;
+        color: white;
+        background-color: red;
+        padding: 20px;
+        border-radius: 40px;
+        animation: logo 3s infinite;
+        }
+        .sale2{
+          position: absolute;
+          top: 50%;
+          right: 5%;
+        font-size: 80px;
+        color: white;
+        background-color: red;
+        padding: 20px;
+        border-radius: 40px;
+        animation: logo 3s infinite;
+        }
         .products {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            border: solid black 2px;
+            justify-content: center;
+         
+        }
+        .opisanie{
+            display: flex;
+            flex-direction: row-reverse;
+            width: 200px;
+            font-size: 20px;
         }
         img {
             width: 350px;
@@ -83,22 +110,24 @@
         <?php
         echo "<div class='products'>";
 
-        // Establish connection to the database
         try {
             $db = new PDO("mysql:host=localhost;dbname=shoes", "root", "");
-            // Enable PDO exception handling
+         
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $id = isset($_GET["id"]) ? (int)$_GET["id"] : 0; // Sanitize the input ID
+            $id = isset($_GET["id"]) ? (int)$_GET["id"] : 0; 
 
             if ($id > 0) {
-                // Prepare and execute the query
+          
                 $query = $db->prepare("SELECT * FROM shoes WHERE id = :id");
                 $query->bindParam(":id", $id, PDO::PARAM_INT);
                 $query->execute();
 
-                // Fetch the shoes data
+  
                 while ($shoes = $query->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<div class='opisanie'>";
+                    echo "<h3>" . $shoes["opisanie"] . "</h3>";
+                    echo "</div>";
                     echo "<div class='items'>";
                     echo "<h2>" . htmlspecialchars($shoes["type"]) . "</h2>";
                     echo "<img src='data:image/jpeg;base64," . base64_encode($shoes["image"]) . "' alt='Afbeelding'>";
@@ -114,6 +143,8 @@
         }
         echo "</div>";
         ?>
+          <div class="sale">SALE</div>
+          <div class="sale2">SALE</div>
     </main>
 </body>
 </html>
