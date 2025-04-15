@@ -86,8 +86,8 @@
     <nav>
         <a href="http://localhost/project/home.php">Home</a>
         <a href="">Contact</a>
-        <a href="">Category</a>
         <a href="">About us</a>
+        <a href="login.php">Login</a>
     </nav>
     <main>
         <?php
