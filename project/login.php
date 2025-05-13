@@ -1,28 +1,25 @@
 <?php
 session_start();
- 
-// CONNECT TO DATABASE
+
+
 $conn = new mysqli("localhost", "root", "", "shoes");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
- 
-// LOGOUT
+
 if (isset($_GET['logout'])) {
     session_destroy();
-    header("Location: ".$_SERVER['PHP_SELF']);
+    header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
- 
-// REGISTER
+
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $conn->query("INSERT INTO users (username, password) VALUES ('$username', '$password')");
     echo "<p>Registered! You can now log in.</p>";
 }
- 
-// LOGIN
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -30,7 +27,7 @@ if (isset($_POST['login'])) {
     if ($row = $result->fetch_assoc()) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user'] = $row;
-            header("Location: ".$_SERVER['PHP_SELF']);
+            header("Location: " . $_SERVER['PHP_SELF']);
             exit();
         } else {
             echo "<p>Wrong password!</p>";
@@ -40,38 +37,50 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
- 
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Simple Login/Register</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Simple Login/Register</title>
 </head>
 <body>
- 
+
+<header>
+    <div class="logo">Our website logo</div>
+</header>
+
+<nav>
+    <a href="">Home</a>
+    <a href="#">Contact</a>
+    <a href="http://localhost/project/home.php">Category</a>
+    <a href="login.php">Login</a>
+     <a href="about.php">About Us</a>
+</nav>
+
 <?php if (isset($_SESSION['user'])): ?>
-<h2>Welcome, <?= $_SESSION['user']['username'] ?>!</h2>
-<p>User ID: <?= $_SESSION['user']['id'] ?></p>
-<p>Your reviews:</p>
-<p>Liked reviews:</p>
-<a href="?logout=true">Logout</a>
- 
+    <div class="form-container">
+        <h2>Welcome, <?= $_SESSION['user']['username'] ?>!</h2>
+        <p>User ID: <?= $_SESSION['user']['id'] ?></p>
+        <a href="?logout=true">Logout</a>
+    </div>
 <?php else: ?>
- 
-    <h2>Register</h2>
-<form method="post">
-        Username: <input type="text" name="username" required><br>
-        Password: <input type="password" name="password" required><br>
-<button type="submit" name="register">Register</button>
-</form>
- 
-    <h2>Login</h2>
-<form method="post">
-        Username: <input type="text" name="username" required><br>
-        Password: <input type="password" name="password" required><br>
-<button type="submit" name="login">Login</button>
-</form>
- 
+    <div class="form-container">
+        <h2>Register</h2>
+        <form method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="register">Register</button>
+        </form>
+
+        <h2>Login</h2>
+        <form method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit" name="login">Login</button>
+        </form>
+    </div>
 <?php endif; ?>
- 
+
 </body>
 </html>

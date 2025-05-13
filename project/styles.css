@@ -1,0 +1,138 @@
+
+body {
+    margin: 0;
+    background-color: rgb(178, 167, 255);
+    font-family: Arial, sans-serif;
+}
+
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #9966cc;
+}
+
+.logo {
+    font-size: 50px;
+    color: black;
+    animation: bounce 3s infinite;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine;
+    gap: 30px;
+    padding: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #7b68ee;
+}
+
+
+main {
+    padding: 30px 20px;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+
+.items {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.items:hover {
+    transform: translateY(-5px);
+}
+
+.items img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+.opisanie {
+    max-width: 500px;
+    font-size: 18px;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+
+.sale, .sale2 {
+    position: fixed;
+    top: 10px;
+    font-size: 50px;
+    color: white;
+    background-color: red;
+    padding: 10px 20px;
+    border-radius: 20px;
+    animation: bounce 3s infinite;
+}
+
+.sale { left: 20px; }
+.sale2 { right: 20px; }
+
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background-color: #7b68ee;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+button:hover {
+    background-color: #6a5acd;
+}
+input{
+    border: none;
+    border-radius: 12px;
+    outline: none;
+}
